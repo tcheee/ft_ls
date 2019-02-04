@@ -34,6 +34,8 @@ typedef struct	s_option
 }				t_option;
 
 int				ft_inspect(char *av);
-void			get_option(int ac, char **av, t_option *opt);
+void			get_option(int ac, char **av, t_option *opt, int *i);
+int				ft_list(int ac, char **av, t_option *opt, int *i);
+int				ft_list_test_recur(int ac, char **av, t_option *opt, int *i);
 
 #endif

@@ -40,14 +40,14 @@ static void		ft_get_info(char *av, struct stat *info)
 	ft_printf("%s ", id->pw_name);
 	ft_printf("%s ", grp->gr_name);
 	ft_printf("%lld ", info->st_size);
-	ft_printf("%s", ctime(&(info->st_mtime)));
+	ft_printf("%s", ctime(&(info->st_mtime))); // to modify to be the same
 }
 
 int				ft_inspect(char *av)
 {
 	struct stat info;
 
-	if (lstat(av, &info) == -1)
+	if (stat(av, &info) == -1)
 		return (-1);
 	ft_get_info(av, &info);
 	return (0);

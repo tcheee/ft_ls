@@ -17,6 +17,8 @@ CFLAGS = -Wall -Wextra -Werror
 SRCS = srcs/ft_inspect.c\
 		srcs/ft_list.c\
 		srcs/get_option.c\
+		srcs/ft_ls.c\
+		srcs/test_recur.c\
 
 INCS = push_swap.h
 
@@ -32,6 +34,7 @@ $(NAME) : $(OBJ)
 		@make -C $(LIBDIR)
 		@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(NAMELIB)
 		@echo "\033[32m$(NAME) compiled ✔ ✔ ✔ ✔\033[0m"
+		@make clean
 
 clean :
 		@rm -rf $(OBJ)

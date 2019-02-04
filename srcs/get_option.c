@@ -21,35 +21,39 @@ static void	init_opt(t_option *opt)
 	(*opt).r = 0;
 }
 
-void		get_option(int ac, char **av, t_option *opt)
+static void	incrementer(char **av, t_option *opt, int *i, int *j)
 {
-	int i;
+	if (av[*i][*j] == 'l')
+		(*opt).l = 1;
+	else if (av[*i][*j] == 'a')
+		(*opt).a = 1;
+	else if (av[*i][*j] == 'R')
+		(*opt).Re = 1;
+	else if (av[*i][*j] == 't')
+		(*opt).t = 1;
+	else if (av[*i][*j] == 'r')
+		(*opt).r = 1;
+	(*j)++;
+
+}
+
+void		get_option(int ac, char **av, t_option *opt, int *i)
+{
 	int j;
 
-	i = 1;
 	init_opt(opt);
-	while (i < ac)
+	while (*i < ac)
 	{
-		if ((unsigned char)av[i][0] == (unsigned char)('-'))
+		if ((unsigned char)av[*i][0] == (unsigned char)('-'))
 		{
 			j = 0;
-			while (av[i][j] != '\0')
+			while (av[*i][j] != '\0')
 			{
-				if (av[i][j] == 'l')
-					(*opt).l = 1;
-				else if (av[i][j] == 'a')
-					(*opt).a = 1;
-				else if (av[i][j] == 'R')
-					(*opt).Re = 1;
-				else if (av[i][j] == 't')
-					(*opt).t = 1;
-				else if (av[i][j] == 'r')
-					(*opt).r = 1;
-				j++;
+				incrementer(av, opt, i, &j);
 			}
 		}
 		else
 			break ;
-		i++;
+		(*i)++;
 	}
 }

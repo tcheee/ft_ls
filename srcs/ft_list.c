@@ -1,46 +1,62 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_list.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/31 14:16:44 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/01 19:49:27 by tcherret         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+
+
+
+
+
+
+
+
+
 
 #include "../includes/ft_ls.h"
 
-int		main(int ac, char **av)
+static void		read_dir(struct dirent *info, DIR *direct, t_option *opt)
 {
-	int			i;
-	DIR			*direct;
-	struct		dirent *info;
-	t_option	opt;
-
-	direct = NULL;
-	i = 1;
-	if (ac == 1)
-		return (0);
-	else
+	while ((info = readdir(direct)) != NULL)
 	{
-		get_option(ac, av, &opt);
-		while (i <= ac - 1)
+		if (opt->a == 0)
 		{
-			//if ((direct = opendir(av[i])) == NULL)
-			//	manage_error();
-			while ((info = readdir(direct)) != NULL)
+			if ((info->d_name)[0] != '.')
 			{
-				if (opt.a == 0)
-					if ((info->d_name)[0] == '.')
-						ft_printf("%s\n", info->d_name);
-				 if (opt.a == 1)
+				if (opt->l == 0)
 					ft_printf("%s\n", info->d_name);
+				else
+					ft_inspect(info->d_name);
 			}
 		}
-		closedir(direct);
-		i++;
+		else if (opt->a == 1)
+		{
+			if (opt->l == 0)
+				ft_printf("%s\n", info->d_name);
+			else
+				ft_inspect(info->d_name);
+		}
 	}
+}
+
+int		ft_list(int ac, char **av, t_option *opt, int *i)
+{
+	DIR				*direct;
+	struct	dirent	*info;
+
+	direct = NULL;
+	info = NULL;
+	if (*i == ac)
+	{
+		if ((direct = opendir("./")) == NULL)
+			return (-1); //manage_errror
+		read_dir(info, direct, opt);
+	}
+	else
+	{
+		while (*i < ac)
+		{
+			if ((direct = opendir(av[*i])) == NULL)
+				return (-1); //manage_error();
+			read_dir(info, direct, opt);
+			(*i)++;
+		}
+	}
+	closedir(direct);
 	return (0);
 }
