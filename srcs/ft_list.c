@@ -19,6 +19,7 @@ int		main(int ac, char **av)
 	struct		dirent *info;
 	t_option	opt;
 
+	direct = NULL;
 	i = 1;
 	if (ac == 1)
 		return (0);
@@ -27,8 +28,8 @@ int		main(int ac, char **av)
 		get_option(ac, av, &opt);
 		while (i <= ac - 1)
 		{
-			if ((direct = opendir(av[i])) == NULL)
-				manage_error();
+			//if ((direct = opendir(av[i])) == NULL)
+			//	manage_error();
 			while ((info = readdir(direct)) != NULL)
 			{
 				if (opt.a == 0)
