@@ -33,6 +33,12 @@ static void	incrementer(char **av, t_option *opt, int *i, int *j)
 		(*opt).t = 1;
 	else if (av[*i][*j] == 'r')
 		(*opt).r = 1;
+	else
+	{
+		ft_printf("ft_ls: illegal option -- %c\n", av[*i][*j]);
+		ft_printf("usage: ft_ls [-Ralrt] [file ...]\n");
+		exit(0);
+	}
 	(*j)++;
 
 }
@@ -46,11 +52,9 @@ void		get_option(int ac, char **av, t_option *opt, int *i)
 	{
 		if ((unsigned char)av[*i][0] == (unsigned char)('-'))
 		{
-			j = 0;
+			j = 1;
 			while (av[*i][j] != '\0')
-			{
 				incrementer(av, opt, i, &j);
-			}
 		}
 		else
 			break ;

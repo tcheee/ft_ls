@@ -20,16 +20,12 @@ static void		read_dir(struct dirent *info, DIR *direct, t_option *opt)
 			{
 				if (opt->l == 0)
 					ft_printf("%s\n", info->d_name);
-				else
-					ft_inspect(info->d_name);
 			}
 		}
 		else if (opt->a == 1)
 		{
 			if (opt->l == 0)
 				ft_printf("%s\n", info->d_name);
-			else
-				ft_inspect(info->d_name);
 		}
 	}
 }

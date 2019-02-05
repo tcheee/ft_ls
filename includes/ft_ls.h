@@ -23,6 +23,9 @@
 #include <sys/types.h>
 #include <pwd.h>
 #include <grp.h>
+#include <errno.h>
+#include <stdio.h>
+#include <string.h>
 
 typedef struct	s_option
 {
@@ -31,11 +34,16 @@ typedef struct	s_option
 	int	Re;
 	int	t;
 	int	r;
+	int	error;
 }				t_option;
 
-int				ft_inspect(char *av);
+int				ft_inspect(char *name, char *path);
 void			get_option(int ac, char **av, t_option *opt, int *i);
 int				ft_list(int ac, char **av, t_option *opt, int *i);
-int				ft_list_test_recur(int ac, char **av, t_option *opt, int *i);
+int				ft_ls_recur(char *name, t_option *opt);
+int				managerror(char *name, t_option *opt);
+int				managerror_bis(char *name);
+char			**ft_sort(char **list);
+int				check_error_ls(int ac, char **av, t_option *opt);
 
 #endif

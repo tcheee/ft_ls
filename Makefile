@@ -18,7 +18,9 @@ SRCS = srcs/ft_inspect.c\
 		srcs/ft_list.c\
 		srcs/get_option.c\
 		srcs/ft_ls.c\
-		srcs/test_recur.c\
+		srcs/ft_ls_recur.c\
+		srcs/managerror.c\
+		srcs/check_error.c\
 
 INCS = push_swap.h
 

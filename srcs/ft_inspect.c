@@ -27,6 +27,23 @@ static void		get_mode(struct stat *info)
 	ft_printf(" ");
 }
 
+static void		get_time(struct stat *info)
+{
+	char			time[13];
+	int				i;
+	int				j;
+
+	i = 0;
+	j = 4;
+	while (i < 12)
+	{
+		time[i] = ctime(&(info->st_ctime))[j];
+		i++;
+		j++;
+	}
+	time[12] = '\0';
+	ft_printf("%s ", time);
+}
 static void		ft_get_info(char *av, struct stat *info)
 {
 	struct passwd	*id;
@@ -34,21 +51,23 @@ static void		ft_get_info(char *av, struct stat *info)
 
 	id = getpwuid(info->st_uid);
 	grp = getgrgid(info->st_gid);
-	ft_printf("%s ", av);
 	get_mode(info);
 	ft_printf("%ld ", info->st_nlink);
 	ft_printf("%s ", id->pw_name);
 	ft_printf("%s ", grp->gr_name);
 	ft_printf("%lld ", info->st_size);
-	ft_printf("%s", ctime(&(info->st_mtime))); // to modify to be the same
+	get_time(info);
+	ft_printf("%s\n", av);
 }
 
-int				ft_inspect(char *av)
+int				ft_inspect(char *name, char *path)
 {
 	struct stat info;
 
-	if (stat(av, &info) == -1)
+	path = ft_strcat(path, "/");
+	ft_printf("path = %s et name = %s\n", path, name);
+	if (lstat(ft_strcat(path, name), &info) == -1)
 		return (-1);
-	ft_get_info(av, &info);
+	ft_get_info(name, &info);
 	return (0);
 }
