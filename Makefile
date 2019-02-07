@@ -1,10 +1,14 @@
-
-
-
-
-
-
-
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: tcherret <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2019/02/07 12:35:44 by tcherret          #+#    #+#              #
+#    Updated: 2019/02/07 17:30:55 by tcherret         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 NAME = ft_ls
 
@@ -12,7 +16,7 @@ NAMELIB = ./libft/libftprintf.a
 
 CC = @gcc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -fsanitize=address -g -Wall -Wextra -Werror
 
 SRCS = srcs/ft_inspect.c\
 		srcs/ft_list.c\
@@ -21,6 +25,7 @@ SRCS = srcs/ft_inspect.c\
 		srcs/ft_ls_recur.c\
 		srcs/managerror.c\
 		srcs/check_error.c\
+		srcs/get_padding.c\
 
 INCS = push_swap.h
 

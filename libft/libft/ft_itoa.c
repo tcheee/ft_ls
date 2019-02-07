@@ -6,7 +6,7 @@
 /*   By: ayguillo <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 13:59:12 by ayguillo          #+#    #+#             */
-/*   Updated: 2019/01/04 15:35:31 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/07 17:20:47 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char			*ft_itoa(long long n)
 
 	nbr = n;
 	len = ft_len_nbr(nbr);
-	if (!(str = (char*)malloc(sizeof(*str) * (len + 1))))
+	if (!(str = (char*)malloc(len + 1)))
 		return (NULL);
 	str[len--] = '\0';
 	if (nbr == 0)

@@ -1,11 +1,14 @@
-
-
-
-
-
-
-
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_error.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/02/07 12:34:41 by tcherret          #+#    #+#             */
+/*   Updated: 2019/02/07 15:03:39 by tcherret         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
@@ -29,6 +32,28 @@ static int		check_option(char *str)
 	return (0);
 }
 
+static void		check_dash(int ac, char **av, t_option *opt, int *i)
+{
+	if (ac == 2)
+	{
+		if (ft_strcmp(av[*i], "-") == 0)
+		{
+			managerror(av[*i], opt);
+			(*i)++;
+			exit (0);
+		}
+	}
+	else
+	{
+		if (ft_strcmp(av[*i], "-") == 0)
+		{
+			opt->error = 1;
+			managerror(av[*i], opt);
+			(*i)++;
+		}
+	}
+}
+
 int		check_error_ls(int ac, char **av, t_option *opt)
 {
 	DIR		*direct;
@@ -37,6 +62,8 @@ int		check_error_ls(int ac, char **av, t_option *opt)
 	i = 1;
 	opt->error = 0;
 	direct = NULL;
+	if (av[i])
+		check_dash(ac, av, opt, &i);
 	while (av[i] && check_option(av[i]) == 1)
 		i++;
 	while (i < ac)

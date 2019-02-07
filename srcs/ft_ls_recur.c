@@ -1,10 +1,14 @@
-
-
-
-
-
-
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_ls_recur.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/02/07 12:34:31 by tcherret          #+#    #+#             */
+/*   Updated: 2019/02/07 17:34:31 by tcherret         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
@@ -23,13 +27,19 @@ static int		get_num_elem(DIR *direct, char *name)
 static void		display_list(char **list, int j, t_option *opt, char *name)
 {
 	int i;
+	char	*stock;
 
 	//list = ft_sort(list, opt);
 	i = 0;
+	if (opt->l >= 1)
+		ft_printf("total %d\n", opt->tot);
 	while (i < j)
 	{
+		stock = ft_strdup(name);
 		if ((opt->a && list[i][0] == '.') || list[i][0] != '.')
-			opt->l == 0 ? ft_printf("%s\n", list[i]) : ft_inspect(list[i], name);
+			opt->l == 0 ? ft_printf("%s\n", list[i]) : ft_inspect(name, list[i], opt);
+		name = ft_strdup(stock);
+		//free(stock);
 		free(list[i]);
 		i++;
 	}
@@ -98,13 +108,15 @@ int		ft_ls_recur(char *name, t_option *opt)
 	{
 		if (opt->error == 1)
 			ft_printf("%s:\n", name);
-		else if (opt->error == 2)
+		else if (opt->error == 2 || opt->l > 1)
 			ft_printf("\n%s:\n", name);
 		i = get_num_elem(direct, name);
 		if (!(list = malloc(sizeof(char**) * i)))
 			return (-1);
 		j = i;
 		create_list(&i, info, direct, list);
+		if (opt->l >= 1)
+			get_padding(name, opt, list, j);
 		display_list(list, j, opt, name);
 		free(list);
 	}

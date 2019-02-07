@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_list.c                                          :+:      :+:    :+:   */
+/*   ft_ls.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/31 14:16:44 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/01 19:49:27 by tcherret         ###   ########.fr       */
+/*   Created: 2019/02/07 12:35:17 by tcherret          #+#    #+#             */
+/*   Updated: 2019/02/07 17:51:28 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
+#include <stdio.h>
 
 /*static void		slash_16(char **name)
-{
-	int len;
+  {
+  int len;
 
-	len = ft_strlen(*name);
-	if ((*name)[len - 1] == '/')
-		(*name)[len - 1] = '\0';
-}*/
+  len = ft_strlen(*name);
+  if ((*name)[len - 1] == '/')
+  (*name)[len - 1] = '\0';
+  }*/
 
 int		main(int ac, char **av)
 {
@@ -37,8 +38,11 @@ int		main(int ac, char **av)
 	{
 		while (i < ac)
 		{
-			//slash_16(&av[i]);
+			if (ac > 3 && opt.l == 1)
+				ft_printf("%s:\n", av[i]);
 			ft_ls_recur(av[i], &opt);
+			if (ac > 3 && opt.l == 1)
+				opt.l = 2;
 			i++;
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 11:47:04 by tcherret          #+#    #+#             */
-/*   Updated: 2019/01/03 17:10:55 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/07 16:58:01 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ int				check_flag_hl(const char *f, int t)
 	h = 0;
 	k = 0;
 	k1 = 0;
-	while (f[t] != 'd' && f[t] != 'i' && f[t] != 'o'
+	while (f[t] && f[t] != 'd' && f[t] != 'i' && f[t] != 'o'
 			&& f[t] != 'u' && f[t] != 'x' && f[t] != 'X')
 	{
-		if (f[t] == 'l' && f[t + 1] == 'l' && h < 4)
+		if (f[t + 1] && f[t] == 'l' && f[t + 1] == 'l' && h < 4)
 			h = 4;
 		else if (f[t] == 'l' && h < 3)
 			h = 3;
@@ -45,7 +45,7 @@ int				check_flag_hl(const char *f, int t)
 			gain_space(&h, &k);
 		else if (f[t] == 'L')
 			h = 5;
-		if (f[t] == 'h' && f[t - 1] != 'h')
+		if (t > 0 && f[t] == 'h' && f[t - 1] != 'h')
 			k1++;
 		t++;
 	}

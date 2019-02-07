@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 19:12:22 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/01 19:48:46 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/07 17:38:54 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@ static void	init_opt(t_option *opt)
 	(*opt).Re = 0;
 	(*opt).t = 0;
 	(*opt).r = 0;
+	(*opt).tot = 0;
+	(*opt).pad1 = 0;
+	(*opt).pad2 = 0;
+	(*opt).nb = 0;
 }
 
 static void	incrementer(char **av, t_option *opt, int *i, int *j)
@@ -60,4 +64,6 @@ void		get_option(int ac, char **av, t_option *opt, int *i)
 			break ;
 		(*i)++;
 	}
+	if (ac > 3)
+		(*opt).nb = 1;
 }

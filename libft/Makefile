@@ -6,7 +6,7 @@
 #    By: ayguillo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/14 16:47:38 by ayguillo          #+#    #+#              #
-#    Updated: 2019/01/14 13:47:39 by tcherret         ###   ########.fr        #
+#    Updated: 2019/02/07 17:18:59 by tcherret         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ LIBFT = libft
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 
 SRCS = capture_the_flag.c	\
 	   get_precision.c		\
