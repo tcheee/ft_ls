@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 12:34:31 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/07 17:34:31 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/08 18:14:37 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,8 @@ static void		display_list(char **list, int j, t_option *opt, char *name)
 	{
 		stock = ft_strdup(name);
 		if ((opt->a && list[i][0] == '.') || list[i][0] != '.')
-			opt->l == 0 ? ft_printf("%s\n", list[i]) : ft_inspect(name, list[i], opt);
-		name = ft_strdup(stock);
-		//free(stock);
+			opt->l == 0 ? ft_printf("%s\n", list[i]) : ft_inspect(stock, list[i], opt);
+		free(stock);
 		free(list[i]);
 		i++;
 	}
