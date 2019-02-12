@@ -23,6 +23,8 @@ static void	init_opt(t_option *opt)
 	(*opt).pad1 = 0;
 	(*opt).pad2 = 0;
 	(*opt).nb = 0;
+	(*opt).elem = 0;
+	(*opt).dev = 0;
 }
 
 static void	incrementer(char **av, t_option *opt, int *i, int *j)

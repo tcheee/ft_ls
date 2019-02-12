@@ -14,7 +14,16 @@
 
 static void		get_mode(struct stat *info)
 {
-	ft_printf( (S_ISDIR(info->st_mode)) ? "d" : "-");
+	if (S_ISDIR(info->st_mode))
+		ft_printf("d");
+	else if (S_ISCHR(info->st_mode))
+		ft_printf("c");
+	else if (S_ISBLK(info->st_mode))
+		ft_printf("b");
+	else if (S_ISLNK(info->st_mode))
+		ft_printf("l");
+	else
+		ft_printf("-");
 	ft_printf( (info->st_mode & S_IRUSR) ? "r" : "-");
 	ft_printf( (info->st_mode & S_IWUSR) ? "w" : "-");
 	ft_printf( (info->st_mode & S_IXUSR) ? "x" : "-");
@@ -53,12 +62,12 @@ static void		create_padding(char **s1, char **s2, t_option *opt)
 	(*s1)[0] = '%';
 	*s1 = ft_strcat(*s1, tmp);
 	*s1 = ft_strcat(*s1, "ld ");
-	free(tmp);
+	//free(tmp);
 	tmp = ft_itoa(opt->pad2);
 	(*s2)[0] = '%';
 	*s2 = ft_strcat(*s2, tmp);
 	*s2 = ft_strcat(*s2, "lld ");
-	free(tmp);
+	//free(tmp);
 }
 
 static void		ft_get_info(char *av, struct stat *info, t_option *opt)
@@ -80,8 +89,18 @@ static void		ft_get_info(char *av, struct stat *info, t_option *opt)
 	get_mode(info);
 	ft_printf(s1, info->st_nlink);
 	ft_printf("%s ", id->pw_name);
-	ft_printf("%s ", grp->gr_name);
-	ft_printf(s2, info->st_size);
+	if (opt->dev == 0)
+	{
+		ft_printf("%s ", grp->gr_name);
+		ft_printf(s2, info->st_size);
+	}
+	else if (opt->dev == 1)
+	{
+		ft_printf("%-12s ", grp->gr_name);
+		ft_printf("%d, ", major(info->st_rdev));
+		ft_printf("%d ", minor(info-> st_rdev));
+	}
+
 	get_time(info);
 	ft_printf("%s\n", av);
 	free(s1);
@@ -92,7 +111,8 @@ int				ft_inspect(char *path, char *name, t_option *opt)
 {
 	struct stat info;
 
-	path = ft_strcat(path, "/");
+	if (opt->error != 2)
+		path = ft_strcat(path, "/");
 	if (lstat(ft_strcat(path, name), &info) == -1)
 		return (-1);
 	ft_get_info(name, &info, opt);

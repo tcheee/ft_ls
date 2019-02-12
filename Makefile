@@ -19,13 +19,13 @@ CC = @gcc
 CFLAGS = -Wall -Wextra -Werror
 
 SRCS = srcs/ft_inspect.c\
-		srcs/ft_list.c\
 		srcs/get_option.c\
 		srcs/ft_ls.c\
 		srcs/ft_ls_recur.c\
 		srcs/managerror.c\
 		srcs/check_error.c\
 		srcs/get_padding.c\
+		srcs/ft_sort.c\
 
 INCS = push_swap.h
 

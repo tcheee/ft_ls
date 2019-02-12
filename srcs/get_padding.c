@@ -35,6 +35,7 @@ int		get_padding(char *path, t_option *opt, char **list, int j)
 	struct stat		info;
 
 	i = 0;
+	opt->tot = 0;
 	while (i < j)
 	{
 		stock = ft_strdup(path);
@@ -46,7 +47,7 @@ int		get_padding(char *path, t_option *opt, char **list, int j)
 			find_number(opt, &info);
 		}
 		path = ft_strdup(stock);
-		//free(stock);
+		free(stock);
 		i++;
 	}
 	return (0);

@@ -39,6 +39,8 @@ typedef struct	s_option
 	int	pad1;
 	int	pad2;
 	int	nb;
+	int	elem;
+	int	dev;
 }				t_option;
 
 int				ft_inspect(char *path, char *name, t_option *opt);
@@ -47,7 +49,7 @@ int				ft_list(int ac, char **av, t_option *opt, int *i);
 int				ft_ls_recur(char *name, t_option *opt);
 int				managerror(char *name, t_option *opt);
 int				managerror_bis(char *name);
-char			**ft_sort(char **list);
+char			**ft_sort(char **list, t_option *opt);
 int				check_error_ls(int ac, char **av, t_option *opt);
 int				get_padding(char *name, t_option *opt, char **list, int j);
 

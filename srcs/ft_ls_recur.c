@@ -12,7 +12,7 @@
 
 #include "../includes/ft_ls.h"
 
-static int		get_num_elem(DIR *direct, char *name)
+static int		get_num_elem(DIR *direct, char *name, t_option *opt)
 {
 	int i;
 
@@ -21,6 +21,7 @@ static int		get_num_elem(DIR *direct, char *name)
 	while (readdir(direct) != NULL)
 		i++;
 	closedir(direct);
+	opt->elem = i;
 	return (i);
 }
 
@@ -29,6 +30,11 @@ static void		display_list(char **list, int j, t_option *opt, char *name)
 	int i;
 	char	*stock;
 
+	/*if (opt->t == 1)
+		list = ft_time_sort(list);
+	else if (opt->r == 1)
+		list = ft_reverse_sort(list);
+	else*/
 	//list = ft_sort(list, opt);
 	i = 0;
 	if (opt->l >= 1)
@@ -42,7 +48,6 @@ static void		display_list(char **list, int j, t_option *opt, char *name)
 		free(list[i]);
 		i++;
 	}
-	//penser a free ici;
 }
 
 static char		*get_new_name(char *name, t_option *opt)
@@ -105,11 +110,13 @@ int		ft_ls_recur(char *name, t_option *opt)
 		managerror_bis(name);
 	else
 	{
+		if (ft_strcmp("/dev/", name) == 0 || ft_strcmp("/dev", name) == 0)
+			opt->dev = 1;
 		if (opt->error == 1)
 			ft_printf("%s:\n", name);
 		else if (opt->error == 2 || opt->l > 1)
 			ft_printf("\n%s:\n", name);
-		i = get_num_elem(direct, name);
+		i = get_num_elem(direct, name, opt);
 		if (!(list = malloc(sizeof(char**) * i)))
 			return (-1);
 		j = i;

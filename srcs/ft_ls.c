@@ -28,8 +28,8 @@ int		main(int ac, char **av)
 	t_option		opt;
 
 	i = 1;
-	check_error_ls(ac, av, &opt);
 	get_option(ac, av, &opt, &i);
+	check_error_ls(ac, av, &opt);
 	if (i == ac)
 	{
 		ft_ls_recur(ft_strdup("."), &opt);
