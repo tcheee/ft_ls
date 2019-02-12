@@ -67,6 +67,7 @@ static char		*get_new_name(char *name, t_option *opt)
 			if (info->d_type == DT_DIR)
 				if (ft_strcmp(info->d_name, ".")
 						&& ft_strcmp(info->d_name, ".."))
+					if ((opt->a == 1 && (info->d_name[0] == '.')) || ((info->d_name)[0] != '.'))
 				{
 					old_name = ft_strdup(name);
 					name = ft_strcat(name, "/");
