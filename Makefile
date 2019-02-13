@@ -28,6 +28,9 @@ SRCS = srcs/ft_inspect.c\
 		srcs/ft_sort.c\
 		srcs/ft_reverse_sort.c\
 		srcs/ft_time_sort.c\
+		srcs/display_list.c\
+		srcs/get_num_elem.c\
+		srcs/create_list.c\
 
 INCS = push_swap.h
 

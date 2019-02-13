@@ -12,51 +12,12 @@
 
 #include "../includes/ft_ls.h"
 
-static int		get_num_elem(DIR *direct, char *name, t_option *opt)
-{
-	int i;
-
-	i = 0;
-	direct = opendir(name);
-	while (readdir(direct) != NULL)
-		i++;
-	closedir(direct);
-	opt->elem = i;
-	return (i);
-}
-
-static void		display_list(char **list, int j, t_option *opt, char *name)
-{
-	int i;
-	char	*stock;
-
-	stock = ft_strdup(name);
-	if (opt->t == 1 && opt->r == 1)
-		ft_rtime_sort(stock, list, opt);
-	else if (opt->t == 1)
-		list = ft_time_sort(stock, list, opt);
-	else if (opt->r == 1)
-		list = ft_reverse_sort(list, opt);
-	else
-		list = ft_sort(list, opt);
-	i = 0;
-	if (opt->l >= 1)
-		ft_printf("total %d\n", opt->tot);
-	while (i < j)
-	{
-		if ((opt->a && list[i][0] == '.') || list[i][0] != '.')
-			opt->l == 0 ? ft_printf("%s\n", list[i]) : ft_inspect(stock, list[i], opt);
-		//free(list[i]);
-		i++;
-	}
-	free(stock);
-}
-
-static char		*get_new_name(char *name, t_option *opt)
+static char		*get_new_name(char *name, char **list, t_option *opt)
 {
 	DIR				*direct;
 	struct	dirent	*info;
 	char			*old_name;
+	int				i;
 
 	old_name = NULL;
 	direct = NULL;
@@ -64,42 +25,28 @@ static char		*get_new_name(char *name, t_option *opt)
 		managerror_bis(name);
 	else
 	{
+		i = 0;
 		if (opt->r == 0 && opt->t == 0)
 		{
-			while ((info = readdir(direct)) != NULL)
+			while (i < opt->elem)
 			{
-				if (info->d_type == DT_DIR)
-					if (ft_strcmp(info->d_name, ".")
-							&& ft_strcmp(info->d_name, ".."))
-						if ((opt->a == 1 && (info->d_name[0] == '.')) || ((info->d_name)[0] != '.'))
+				if ((direct = opendir(list[i])) != NULL)
+					if (ft_strcmp(list[i], ".")
+							&& ft_strcmp(list[i], ".."))
+						if ((opt->a == 1 && (list[i][0] == '.')) || (list[i][0] != '.'))
 						{
 							old_name = ft_strdup(name);
 							name = ft_strcat(name, "/");
-							name = ft_strcat(name, info->d_name);
+							name = ft_strcat(name, list[i]);
 							ft_printf("\n%s:\n", name);
 							ft_ls_recur(name, opt);
 							name = old_name;
 						}
 			}
-		}
-		else if (opt->r == 1)
-		{
-
+			closedir(direct);
 		}
 	}
 	return (NULL);
-}
-
-static void		create_list(int *i, struct dirent *info, DIR *direct, char **list)
-{
-	*i = 0;
-	while ((info = readdir(direct)) != NULL)
-	{
-		if ((list[*i] = ft_strdup(info->d_name)) == NULL)
-			return ;
-		(*i)++;
-	}
-	closedir(direct);
 }
 
 int		ft_ls_recur(char *name, t_option *opt)

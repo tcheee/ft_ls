@@ -55,5 +55,8 @@ char			**ft_rtime_sort(char *path, char **list, t_option *opt);
 char			**ft_time_sort(char *path, char **list, t_option *opt);
 int				check_error_ls(int ac, char **av, t_option *opt);
 int				get_padding(char *name, t_option *opt, char **list, int j);
+void			display_list(char **list, int j, t_option *opt, char *name);
+int				get_num_elem(DIR *direct, char *name, t_option *opt);
+void			create_list(int *i, struct dirent *info, DIR *direct, char **list);
 
 #endif
