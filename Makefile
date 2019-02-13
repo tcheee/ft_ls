@@ -26,6 +26,8 @@ SRCS = srcs/ft_inspect.c\
 		srcs/check_error.c\
 		srcs/get_padding.c\
 		srcs/ft_sort.c\
+		srcs/ft_reverse_sort.c\
+		srcs/ft_time_sort.c\
 
 INCS = push_swap.h
 

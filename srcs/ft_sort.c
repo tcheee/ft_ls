@@ -19,10 +19,10 @@ char	**ft_sort(char **list, t_option *opt)
 	char	*tmp;
 
 	j = 0;
-	while (j < opt->elem)
+	while (j < opt->elem - 1)
 	{
 		i = 0;
-		while (i < opt->elem)
+		while (i < opt->elem - 1)
 		{
 			if (list[i + 1] && ft_strcmp(list[i], list[i + 1]) > 0)
 			{

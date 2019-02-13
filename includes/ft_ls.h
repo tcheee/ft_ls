@@ -50,6 +50,9 @@ int				ft_ls_recur(char *name, t_option *opt);
 int				managerror(char *name, t_option *opt);
 int				managerror_bis(char *name);
 char			**ft_sort(char **list, t_option *opt);
+char			**ft_reverse_sort(char **list, t_option *opt);
+char			**ft_rtime_sort(char *path, char **list, t_option *opt);
+char			**ft_time_sort(char *path, char **list, t_option *opt);
 int				check_error_ls(int ac, char **av, t_option *opt);
 int				get_padding(char *name, t_option *opt, char **list, int j);
 
