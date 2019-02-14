@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 12:34:31 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/13 17:33:43 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/13 18:05:09 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int		ft_ls_recur(char *name, t_option *opt)
 			opt->dev = 1;
 		if (opt->error == 1)
 			ft_printf("%s:\n", name);
-		else if (opt->error == 2 || opt->l > 1)
+		else if (opt->error == 2 || opt->aff == 1)
 			ft_printf("\n%s:\n", name);
 		i = get_num_elem(direct, name, opt);
 		if (!(list = malloc(sizeof(char**) * i)))

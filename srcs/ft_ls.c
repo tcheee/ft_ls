@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 12:35:17 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/07 17:51:28 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/13 18:08:48 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ int		main(int ac, char **av)
 	{
 		while (i < ac)
 		{
-			if (ac > 3 && opt.l == 1)
+			if ((opt.rep > 1 && opt.aff == 0 && opt.error == 0))
 				ft_printf("%s:\n", av[i]);
 			ft_ls_recur(av[i], &opt);
-			if (ac > 3 && opt.l == 1)
-				opt.l = 2;
+			if (opt.rep > 1)
+				opt.aff = 1;
 			i++;
 		}
 	}

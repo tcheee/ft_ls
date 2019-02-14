@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 17:29:18 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/07 17:38:18 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/13 18:03:58 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ typedef struct	s_option
 	int	nb;
 	int	elem;
 	int	dev;
+	int	rep;
+	int	aff;
 }				t_option;
 
 int				ft_inspect(char *path, char *name, t_option *opt);
@@ -58,5 +60,6 @@ int				get_padding(char *name, t_option *opt, char **list, int j);
 void			display_list(char **list, int j, t_option *opt, char *name);
 int				get_num_elem(DIR *direct, char *name, t_option *opt);
 void			create_list(int *i, struct dirent *info, DIR *direct, char **list);
+int				get_num_arg(int ac, char **av);
 
 #endif

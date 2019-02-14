@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 19:12:22 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/07 17:38:54 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/13 18:04:09 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static void	init_opt(t_option *opt)
 	(*opt).nb = 0;
 	(*opt).elem = 0;
 	(*opt).dev = 0;
+	(*opt).rep = 0;
+	(*opt).aff = 0;
 }
 
 static void	incrementer(char **av, t_option *opt, int *i, int *j)
@@ -54,6 +56,7 @@ void		get_option(int ac, char **av, t_option *opt, int *i)
 	int j;
 
 	init_opt(opt);
+	opt->rep = get_num_arg(ac, av);
 	while (*i < ac)
 	{
 		if ((unsigned char)av[*i][0] == (unsigned char)('-'))

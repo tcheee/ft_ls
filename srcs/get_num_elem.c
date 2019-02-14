@@ -21,3 +21,19 @@ int		get_num_elem(DIR *direct, char *name, t_option *opt)
 	opt->elem = i;
 	return (i);
 }
+
+int		get_num_arg(int ac, char **av)
+{
+	int i;
+	int j;
+
+	i = 1;
+	j = 0;
+	while (i < ac)
+	{
+		if (av[i][0] != '-')
+			j++;
+		i++;
+	}
+	return (j);
+}

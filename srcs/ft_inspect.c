@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 15:51:50 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/13 17:10:05 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/13 17:48:48 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ static void		ft_get_info(char *av, struct stat *info, t_option *opt)
 	struct group	*grp;
 	char			*s1;
 	char			*s2;
+	char			*link;
 
 	if (!(s1 = malloc(opt->pad1 + 5)))
 		return ;
@@ -98,11 +99,20 @@ static void		ft_get_info(char *av, struct stat *info, t_option *opt)
 	{
 		ft_printf("%-12s ", grp->gr_name);
 		ft_printf("%d, ", major(info->st_rdev));
-		ft_printf("%d ", minor(info-> st_rdev));
+		ft_printf("%d ", minor(info->st_rdev));
 	}
 
 	get_time(info);
-	ft_printf("%s\n", av);
+	if (S_ISLNK(info->st_mode))
+	{
+		if (!(link = malloc(sizeof(char*) * 10000)))
+			return ;
+		readlink(av, link, 10000);
+		ft_printf("%s -> %s\n", av, link);
+		free(link);
+	}
+	else
+		ft_printf("%s\n", av);
 	free(s1);
 	free(s2);
 }
