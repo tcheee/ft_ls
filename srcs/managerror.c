@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 12:35:33 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/07 17:46:06 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/14 11:37:39 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		managerror(char *name, t_option *opt)
 			return (0);
 		}
 		else
-			ft_printf("%s: %s: %s \n", "ft_ls", name, strerror(errno));;
+			ft_printf("%s: %s: %s \n", "ft_ls", name, strerror(errno));
 	}
 	return (-1);
 }

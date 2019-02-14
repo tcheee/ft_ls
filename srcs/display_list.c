@@ -1,16 +1,20 @@
-
-
-
-
-
-
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   display_list.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/02/14 11:39:52 by tcherret          #+#    #+#             */
+/*   Updated: 2019/02/14 11:40:40 by tcherret         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
 void		display_list(char **list, int j, t_option *opt, char *name)
 {
-	int i;
+	int		i;
 	char	*stock;
 
 	stock = ft_strdup(name);
@@ -28,8 +32,8 @@ void		display_list(char **list, int j, t_option *opt, char *name)
 	while (i < j)
 	{
 		if ((opt->a && list[i][0] == '.') || list[i][0] != '.')
-			opt->l == 0 ? ft_printf("%s\n", list[i]) : ft_inspect(stock, list[i], opt);
-		//free(list[i]);
+			opt->l == 0 ?
+				ft_printf("%s\n", list[i]) : ft_inspect(stock, list[i], opt);
 		i++;
 	}
 	free(stock);

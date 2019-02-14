@@ -6,14 +6,17 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 15:51:50 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/13 17:48:48 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/14 11:37:19 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
-static void		get_mode(struct stat *info)
+static void		get_mode(struct passwd **id, struct group **grp,
+		struct stat *info, char *s1)
 {
+	*id = getpwuid(info->st_uid);
+	*grp = getgrgid(info->st_gid);
 	if (S_ISDIR(info->st_mode))
 		ft_printf("d");
 	else if (S_ISCHR(info->st_mode))
@@ -24,24 +27,38 @@ static void		get_mode(struct stat *info)
 		ft_printf("l");
 	else
 		ft_printf("-");
-	ft_printf( (info->st_mode & S_IRUSR) ? "r" : "-");
-	ft_printf( (info->st_mode & S_IWUSR) ? "w" : "-");
-	ft_printf( (info->st_mode & S_IXUSR) ? "x" : "-");
-	ft_printf( (info->st_mode & S_IRGRP) ? "r" : "-");
-	ft_printf( (info->st_mode & S_IWGRP) ? "w" : "-");
-	ft_printf( (info->st_mode & S_IXGRP) ? "x" : "-");
-	ft_printf( (info->st_mode & S_IROTH) ? "r" : "-");
-	ft_printf( (info->st_mode & S_IWOTH) ? "w" : "-");
-	ft_printf( (info->st_mode & S_IXOTH) ? "x" : "-");
+	ft_printf((info->st_mode & S_IRUSR) ? "r" : "-");
+	ft_printf((info->st_mode & S_IWUSR) ? "w" : "-");
+	ft_printf((info->st_mode & S_IXUSR) ? "x" : "-");
+	ft_printf((info->st_mode & S_IRGRP) ? "r" : "-");
+	ft_printf((info->st_mode & S_IWGRP) ? "w" : "-");
+	ft_printf((info->st_mode & S_IXGRP) ? "x" : "-");
+	ft_printf((info->st_mode & S_IROTH) ? "r" : "-");
+	ft_printf((info->st_mode & S_IWOTH) ? "w" : "-");
+	ft_printf((info->st_mode & S_IXOTH) ? "x" : "-");
 	ft_printf(" ");
+	ft_printf(s1, info->st_nlink);
+	ft_printf("%s ", (*id)->pw_name);
 }
 
-static void		get_time(struct stat *info)
+static void		get_time(struct stat *info, t_option *opt, struct group *grp,
+		char *s2)
 {
 	char			time[13];
 	int				i;
 	int				j;
 
+	if (opt->dev == 0)
+	{
+		ft_printf("%s ", grp->gr_name);
+		ft_printf(s2, info->st_size);
+	}
+	else if (opt->dev == 1)
+	{
+		ft_printf("%-12s ", grp->gr_name);
+		ft_printf("%d, ", major(info->st_rdev));
+		ft_printf("%d ", minor(info->st_rdev));
+	}
 	i = 0;
 	j = 4;
 	while (i < 12)
@@ -62,12 +79,12 @@ static void		create_padding(char **s1, char **s2, t_option *opt)
 	(*s1)[0] = '%';
 	*s1 = ft_strcat(*s1, tmp);
 	*s1 = ft_strcat(*s1, "ld ");
-	//free(tmp);
+	free(tmp);
 	tmp = ft_itoa(opt->pad2);
 	(*s2)[0] = '%';
 	*s2 = ft_strcat(*s2, tmp);
 	*s2 = ft_strcat(*s2, "lld ");
-	//free(tmp);
+	free(tmp);
 }
 
 static void		ft_get_info(char *av, struct stat *info, t_option *opt)
@@ -76,43 +93,25 @@ static void		ft_get_info(char *av, struct stat *info, t_option *opt)
 	struct group	*grp;
 	char			*s1;
 	char			*s2;
-	char			*link;
+	//char			*link;
 
 	if (!(s1 = malloc(opt->pad1 + 5)))
 		return ;
 	if (!(s2 = malloc(opt->pad2 + 6)))
 		return ;
-	ft_bzero(s1, opt->pad1 + 5);
-	ft_bzero(s2, opt->pad2 + 6);
 	create_padding(&s1, &s2, opt);
-	id = getpwuid(info->st_uid);
-	grp = getgrgid(info->st_gid);
-	get_mode(info);
-	ft_printf(s1, info->st_nlink);
-	ft_printf("%s ", id->pw_name);
-	if (opt->dev == 0)
-	{
-		ft_printf("%s ", grp->gr_name);
-		ft_printf(s2, info->st_size);
-	}
-	else if (opt->dev == 1)
-	{
-		ft_printf("%-12s ", grp->gr_name);
-		ft_printf("%d, ", major(info->st_rdev));
-		ft_printf("%d ", minor(info->st_rdev));
-	}
-
-	get_time(info);
-	if (S_ISLNK(info->st_mode))
+	get_mode(&id, &grp, info, s1);
+	get_time(info, opt, grp, s2);
+	/*if (S_ISLNK(info->st_mode))
 	{
 		if (!(link = malloc(sizeof(char*) * 10000)))
 			return ;
 		readlink(av, link, 10000);
 		ft_printf("%s -> %s\n", av, link);
 		free(link);
-	}
-	else
-		ft_printf("%s\n", av);
+	}*/
+	//else
+	ft_printf("%s\n", av);
 	free(s1);
 	free(s2);
 }

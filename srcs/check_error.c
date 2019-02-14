@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 12:34:41 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/07 15:03:39 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/14 11:42:20 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void		check_dash(int ac, char **av, t_option *opt, int *i)
 		{
 			managerror(av[*i], opt);
 			(*i)++;
-			exit (0);
+			exit(0);
 		}
 	}
 	else
@@ -54,7 +54,7 @@ static void		check_dash(int ac, char **av, t_option *opt, int *i)
 	}
 }
 
-int		check_error_ls(int ac, char **av, t_option *opt)
+int				check_error_ls(int ac, char **av, t_option *opt)
 {
 	DIR		*direct;
 	int		i;

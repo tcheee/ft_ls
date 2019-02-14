@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 19:12:22 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/13 18:04:09 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/14 11:41:49 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	init_opt(t_option *opt)
 {
 	(*opt).l = 0;
 	(*opt).a = 0;
-	(*opt).Re = 0;
+	(*opt).re = 0;
 	(*opt).t = 0;
 	(*opt).r = 0;
 	(*opt).tot = 0;
@@ -27,6 +27,7 @@ static void	init_opt(t_option *opt)
 	(*opt).dev = 0;
 	(*opt).rep = 0;
 	(*opt).aff = 0;
+	(*opt).slash = 0;
 }
 
 static void	incrementer(char **av, t_option *opt, int *i, int *j)
@@ -36,7 +37,7 @@ static void	incrementer(char **av, t_option *opt, int *i, int *j)
 	else if (av[*i][*j] == 'a')
 		(*opt).a = 1;
 	else if (av[*i][*j] == 'R')
-		(*opt).Re = 1;
+		(*opt).re = 1;
 	else if (av[*i][*j] == 't')
 		(*opt).t = 1;
 	else if (av[*i][*j] == 'r')
@@ -48,7 +49,6 @@ static void	incrementer(char **av, t_option *opt, int *i, int *j)
 		exit(0);
 	}
 	(*j)++;
-
 }
 
 void		get_option(int ac, char **av, t_option *opt, int *i)

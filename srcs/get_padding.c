@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 15:52:50 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/07 17:41:50 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/14 11:38:13 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void		find_number(t_option *opt, struct stat *info)
 		opt->pad2 = sum2;
 }
 
-int		get_padding(char *path, t_option *opt, char **list, int j)
+int				get_padding(char *path, t_option *opt, char **list, int j)
 {
 	int				i;
 	char			*stock;
