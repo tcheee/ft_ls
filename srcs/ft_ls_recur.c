@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 12:34:31 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/08 18:14:37 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/13 17:33:43 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,10 @@
 static char		*get_new_name(char *name, char **list, t_option *opt)
 {
 	DIR				*direct;
-	struct	dirent	*info;
 	char			*old_name;
 	int				i;
+	int				total;
+	struct stat		info;
 
 	old_name = NULL;
 	direct = NULL;
@@ -26,24 +27,30 @@ static char		*get_new_name(char *name, char **list, t_option *opt)
 	else
 	{
 		i = 0;
-		if (opt->r == 0 && opt->t == 0)
+		while (i < opt->elem && list[i])
 		{
-			while (i < opt->elem)
+			total = opt->elem;
+			old_name = ft_strdup(name);
+			name = ft_strcat(name, "/");
+			if (lstat(ft_strcat(name, list[i]), &info) == -1)
+				return (NULL);
+			name = old_name;
+			if (S_ISDIR(info.st_mode))
 			{
-				if ((direct = opendir(list[i])) != NULL)
-					if (ft_strcmp(list[i], ".")
-							&& ft_strcmp(list[i], ".."))
-						if ((opt->a == 1 && (list[i][0] == '.')) || (list[i][0] != '.'))
-						{
-							old_name = ft_strdup(name);
-							name = ft_strcat(name, "/");
-							name = ft_strcat(name, list[i]);
-							ft_printf("\n%s:\n", name);
-							ft_ls_recur(name, opt);
-							name = old_name;
-						}
+				if (ft_strcmp(list[i], ".")
+						&& ft_strcmp(list[i], ".."))
+					if ((opt->a == 1 && (list[i][0] == '.')) || (list[i][0] != '.'))
+					{
+						old_name = ft_strdup(name);
+						name = ft_strcat(name, "/");
+						name = ft_strcat(name, list[i]);
+						ft_printf("\n%s:\n", name);
+						ft_ls_recur(name, opt);
+						name = old_name;
+						opt->elem = total;
+					}
 			}
-			closedir(direct);
+			i++;
 		}
 	}
 	return (NULL);
@@ -83,7 +90,7 @@ int		ft_ls_recur(char *name, t_option *opt)
 			ft_reverse_sort(list, opt);
 		display_list(list, j, opt, name);
 		if (opt->Re == 1)
-			name = get_new_name(name, opt);
+			name = get_new_name(name, list, opt);
 		free(list);
 	}
 	//if (opt->Re == 1)
