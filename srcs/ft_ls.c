@@ -6,20 +6,11 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 12:35:17 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/15 16:35:16 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/15 17:21:01 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
-
-/*static void		slash_16(char **name)
-  {
-  int len;
-
-  len = ft_strlen(*name);
-  if ((*name)[len - 1] == '/')
-  (*name)[len - 1] = '\0';
-  }*/
 
 static int	create_param(int ac, char **av, char **param, int i)
 {
@@ -47,6 +38,18 @@ static void	sort_param(char **param, int total, t_option *opt)
 		param = ft_sort(param, total - 1);
 }
 
+static void	do_the_work(char **param, t_option *opt, int *i)
+{
+	if (ft_strcmp("/", param[*i]) == 0)
+		opt->slash = 1;
+	if ((opt->rep > 1 && opt->aff == 0 && opt->error == 0))
+		ft_printf("%s:\n", param[*i]);
+	ft_ls_recur(param[*i], opt);
+	if (opt->rep > 1)
+		opt->aff = 1;
+	(*i)++;
+}
+
 int			main(int ac, char **av)
 {
 	int				i;
@@ -70,16 +73,7 @@ int			main(int ac, char **av)
 		check_error_ls_param(ac, param, &opt, total);
 		i = 0;
 		while (i < total)
-		{
-			if (ft_strcmp("/", param[i]) == 0)
-				opt.slash = 1;
-			if ((opt.rep > 1 && opt.aff == 0 && opt.error == 0))
-				ft_printf("%s:\n", param[i]);
-			ft_ls_recur(param[i], &opt);
-			if (opt.rep > 1)
-				opt.aff = 1;
-			i++;
-		}
+			do_the_work(param, &opt, &i);
 	}
 	return (0);
 }

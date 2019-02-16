@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 11:38:23 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/14 11:39:28 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/15 17:41:32 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,25 @@ char		**ft_time_sort(char *name, char **list, t_option *opt)
 		i = 0;
 		while (i < opt->elem - 1)
 		{
-			if (list[i + 1] && ft_cmptime(name, list[i], list[i + 1]) < 0)
+			if (ft_cmptime(name, list[i], list[i + 1]) != 0)
 			{
-				tmp = ft_strdup(list[i]);
-				list[i] = ft_strdup(list[i + 1]);
-				list[i + 1] = ft_strdup(tmp);
-				free(tmp);
+				if (list[i + 1] && ft_cmptime(name, list[i], list[i + 1]) < 0)
+				{
+					tmp = ft_strdup(list[i]);
+					list[i] = ft_strdup(list[i + 1]);
+					list[i + 1] = ft_strdup(tmp);
+					free(tmp);
+				}
+			}
+			else
+			{
+				if (list[i + 1] && ft_strcmp(list[i], list[i + 1]) > 0)
+				{
+					tmp = ft_strdup(list[i]);
+					list[i] = ft_strdup(list[i + 1]);
+					list[i + 1] = ft_strdup(tmp);
+					free(tmp);
+				}
 			}
 			i++;
 		}
@@ -63,12 +76,26 @@ char		**ft_rtime_sort(char *name, char **list, t_option *opt)
 		i = 0;
 		while (i < opt->elem - 1)
 		{
-			if (list[i + 1] && ft_cmptime(name, list[i], list[i + 1]) > 0)
+			if (ft_cmptime(name, list[i], list[i + 1]) != 0)
 			{
-				tmp = ft_strdup(list[i]);
-				list[i] = ft_strdup(list[i + 1]);
-				list[i + 1] = ft_strdup(tmp);
-				free(tmp);
+				if (list[i + 1] && ft_cmptime(name, list[i], list[i + 1]) > 0)
+				{
+					tmp = ft_strdup(list[i]);
+					list[i] = ft_strdup(list[i + 1]);
+					list[i + 1] = ft_strdup(tmp);
+					free(tmp);
+				}
+			}
+			else
+			{
+				if (list[i + 1] && ft_strcmp(list[i], list[i + 1]) < 0)
+				{
+					tmp = ft_strdup(list[i]);
+					list[i] = ft_strdup(list[i + 1]);
+					list[i + 1] = ft_strdup(tmp);
+					free(tmp);
+				}
+
 			}
 			i++;
 		}
