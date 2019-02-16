@@ -6,7 +6,7 @@
 #    By: tcherret <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/07 12:35:44 by tcherret          #+#    #+#              #
-#    Updated: 2019/02/15 16:33:15 by tcherret         ###   ########.fr        #
+#    Updated: 2019/02/16 13:44:53 by tcherret         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAMELIB = ./libft/libftprintf.a
 
 CC = @gcc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -fsanitize=address -Wall -Wextra -Werror -g
 
 SRCS = srcs/ft_inspect.c\
 		srcs/get_option.c\
@@ -48,7 +48,6 @@ $(NAME) : $(OBJ)
 		@make -C $(LIBDIR)
 		@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(NAMELIB)
 		@echo "\033[32m$(NAME) compiled ✔ ✔ ✔ ✔\033[0m"
-		@make clean
 
 clean :
 		@rm -rf $(OBJ)

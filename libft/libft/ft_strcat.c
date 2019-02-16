@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 11:07:06 by ayguillo          #+#    #+#             */
-/*   Updated: 2018/11/12 18:39:30 by ayguillo         ###   ########.fr       */
+/*   Updated: 2019/02/16 13:55:14 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,14 @@ char	*ft_strcat(char *s1, const char *s2)
 	char	*tmp;
 	int		len;
 
-	len = ft_strlen(s1) + ft_strlen(s2);
+	if (s1 && s2)
+		len = ft_strlen(s1) + ft_strlen(s2);
+	else if (s1)
+		len = ft_strlen(s1);
+	else if (s2)
+		len = ft_strlen(s2);
+	else
+		return (NULL);
 	if (!(tmp = malloc(sizeof(*tmp) * (len + 1))))
 		return (NULL);
 	i = 0;

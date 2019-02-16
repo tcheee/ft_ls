@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 12:34:31 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/15 17:15:15 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/16 11:50:16 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,6 @@ int				ft_ls_recur(char *name, t_option *opt)
 		opt->slash = 0;
 		if (ft_strcmp(name, "/") == 0)
 			opt->slash = 1;
-		if (ft_strcmp("/dev/", name) == 0 || ft_strcmp("/dev", name) == 0)
-			opt->dev = 1;
 		if (opt->error == 1 && opt->aff == 0)
 			ft_printf("%s:\n", name);
 		else if (opt->error == 2 || opt->aff == 1)
@@ -94,6 +92,7 @@ int				ft_ls_recur(char *name, t_option *opt)
 		if (opt->l >= 1)
 			get_padding(name, opt, list, j);
 		display_list(list, j, opt, name);
+		ft_printf("on affiche la liste\n");
 		if (opt->re == 1)
 			name = get_new_name(name, list, opt);
 		free(list);

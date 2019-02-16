@@ -6,17 +6,18 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 15:51:50 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/15 16:07:59 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/16 14:05:12 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
-static void		get_mode(struct passwd **id, struct group **grp,
+static void		get_mode(struct passwd **id, t_option *opt,
 		struct stat *info, char *s1)
 {
 	*id = getpwuid(info->st_uid);
-	*grp = getgrgid(info->st_gid);
+	if (S_ISCHR(info->st_mode) || S_ISBLK(info->st_mode))
+		opt->dev = 1;
 	if (S_ISDIR(info->st_mode))
 		ft_printf("d");
 	else if (S_ISCHR(info->st_mode))
@@ -38,26 +39,36 @@ static void		get_mode(struct passwd **id, struct group **grp,
 	ft_printf((info->st_mode & S_IXOTH) ? "x" : "-");
 	ft_printf(" ");
 	ft_printf(s1, info->st_nlink);
-	ft_printf("%s ", (*id)->pw_name);
+	*id = getpwuid(info->st_uid);
+	if (opt->dev == 1)
+		ft_printf("%-9s ", (*id)->pw_name);
+	else
+		ft_printf("%s ", (*id)->pw_name);
 }
 
-static void		get_time(struct stat *info, t_option *opt, struct group *grp,
+static void		get_time(struct stat *info, t_option *opt, struct group **grp,
 		char *s2)
 {
 	char			time[13];
 	int				i;
 	int				j;
 
+	*grp = getgrgid(info->st_gid);
 	if (opt->dev == 0)
 	{
-		ft_printf("%s ", grp->gr_name);
+		ft_printf("%s ", (*grp)->gr_name);
 		ft_printf(s2, info->st_size);
 	}
 	else if (opt->dev == 1)
 	{
-		ft_printf("%-12s ", grp->gr_name);
-		ft_printf("%d, ", major(info->st_rdev));
-		ft_printf("%d ", minor(info->st_rdev));
+		ft_printf("%-15s ", (*grp)->gr_name);
+		if (S_ISCHR(info->st_mode) || S_ISBLK(info->st_mode))
+		{
+			ft_printf("%d, ", major(info->st_rdev));
+			ft_printf("%d ", minor(info->st_rdev));
+		}
+		else
+			ft_printf(s2, info->st_size);
 	}
 	i = 0;
 	j = 4;
@@ -100,16 +111,16 @@ static void		ft_get_info(char *av, struct stat *info, t_option *opt)
 	if (!(s2 = malloc(opt->pad2 + 6)))
 		return ;
 	create_padding(&s1, &s2, opt);
-	get_mode(&id, &grp, info, s1);
-	get_time(info, opt, grp, s2);
+	get_mode(&id, opt, info, s1);
+	get_time(info, opt, &grp, s2);
 	/*if (S_ISLNK(info->st_mode))
-	{
-		if (!(link = malloc(sizeof(char*) * 10000)))
-			return ;
-		readlink(av, link, 10000);
-		ft_printf("%s -> %s\n", av, link);
-		free(link);
-	}*/
+	  {
+	  if (!(link = malloc(sizeof(char*) * 10000)))
+	  return ;
+	  readlink(av, link, 10000);
+	  ft_printf("%s -> %s\n", av, link);
+	  free(link);
+	  }*/
 	//else
 	ft_printf("%s\n", av);
 	free(s1);
