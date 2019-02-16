@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 15:51:50 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/14 11:37:19 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/15 16:07:59 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,23 @@ static void		ft_get_info(char *av, struct stat *info, t_option *opt)
 int				ft_inspect(char *path, char *name, t_option *opt)
 {
 	struct stat info;
+	DIR			*direct;
 
-	if (opt->error != 2)
+	if (opt->rep > 0)
+	{
+		direct = NULL;
+		if ((direct = opendir(path)) == NULL)
+		{
+			if (errno == ENOTDIR)
+				opt->error = 2;
+		}
+		else
+		{
+			path = ft_strcat(path, "/");
+			closedir(direct);
+		}
+	}
+	else
 		path = ft_strcat(path, "/");
 	if (lstat(ft_strcat(path, name), &info) == -1)
 		return (-1);

@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 17:29:18 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/14 20:23:40 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/15 15:33:14 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,14 @@ int				ft_ls_recur(char *name, t_option *opt);
 int				managerror(char *name);
 int				managerror_bis(char *name);
 int				managerror_file(char *name, t_option *opt);
-char			**ft_sort(char **list, t_option *opt);
-char			**ft_reverse_sort(char **list, t_option *opt);
+char			**ft_sort(char **list, int nb);
+char			**ft_reverse_sort(char **list, int nb);
 char			**ft_rtime_sort(char *path, char **list, t_option *opt);
 char			**ft_time_sort(char *path, char **list, t_option *opt);
+char			**ft_time_sort_param(char **list, int nb);
+char			**ft_rtime_sort_param(char **list, int nb);
 int				check_error_ls(int ac, char **av, t_option *opt);
+int				check_dev(char *name);
 int				get_padding(char *name, t_option *opt, char **list, int j);
 void			display_list(char **list, int j, t_option *opt, char *name);
 int				get_num_elem(DIR *direct, char *name, t_option *opt);
