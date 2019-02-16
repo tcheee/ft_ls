@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 12:34:31 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/15 16:49:17 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/15 17:15:15 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ static char		*get_new_name(char *name, char **list, t_option *opt)
 		{
 			total = opt->elem;
 			old_name = ft_strdup(name);
-			name = ft_strcat(name, "/");
+			if (opt->slash == 0)
+				name = ft_strcat(name, "/");
 			if (lstat(ft_strcat(name, list[i]), &info) == -1)
 				return (NULL);
 			name = old_name;
@@ -43,7 +44,8 @@ static char		*get_new_name(char *name, char **list, t_option *opt)
 							|| (list[i][0] != '.'))
 					{
 						old_name = ft_strdup(name);
-						name = ft_strcat(name, "/");
+						if (opt->slash == 0)
+							name = ft_strcat(name, "/");
 						name = ft_strcat(name, list[i]);
 						ft_printf("\n%s:\n", name);
 						ft_ls_recur(name, opt);
@@ -75,6 +77,9 @@ int				ft_ls_recur(char *name, t_option *opt)
 		managerror_bis(name);
 	else
 	{
+		opt->slash = 0;
+		if (ft_strcmp(name, "/") == 0)
+			opt->slash = 1;
 		if (ft_strcmp("/dev/", name) == 0 || ft_strcmp("/dev", name) == 0)
 			opt->dev = 1;
 		if (opt->error == 1 && opt->aff == 0)
