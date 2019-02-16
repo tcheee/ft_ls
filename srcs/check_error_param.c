@@ -6,31 +6,24 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 12:06:03 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/15 17:17:36 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/15 18:11:44 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
-static int		check_option_param(char *str)
+/*static int		check_option_param(char *str)
 {
 	int j;
 
+	//thing to change here
 	j = 0;
 	if (str[j] == '-')
 	{
-		j++;
-		while (str[j] != '\0')
-		{
-			if (str[j] != 'R' && str[j] != 'a' && str[j] != 'l'
-					&& str[j] != 'r' && str[j] != 't')
-				return (0);
-			j++;
-		}
-		return (1);
+		managerror(str);
 	}
 	return (0);
-}
+}*/
 
 static void		check_dash_param(int ac, char **av, t_option *opt, int *i)
 {
@@ -54,18 +47,13 @@ static void		check_dash_param(int ac, char **av, t_option *opt, int *i)
 	}
 }
 
-static int				check_file_param(int ac,
-		char **av, t_option *opt, int total)
+static int				check_file_param(char **av, t_option *opt, int total)
 {
 	DIR		*direct;
 	int		i;
 
 	i = 0;
 	direct = NULL;
-	if (av[i])
-		check_dash_param(ac, av, opt, &i);
-	while (av[i] && check_option_param(av[i]) == 1)
-		i++;
 	while (i < total)
 	{
 		if (av[i])
@@ -89,8 +77,6 @@ int				check_error_ls_param(int ac,
 	direct = NULL;
 	if (av[i])
 		check_dash_param(ac, av, opt, &i);
-	while (av[i] && check_option_param(av[i]) == 1)
-		i++;
 	while (i < total)
 	{
 		if (av[i])
@@ -103,6 +89,6 @@ int				check_error_ls_param(int ac,
 			i++;
 		}
 	}
-	check_file_param(ac, av, opt, total);
+	check_file_param(av, opt, total);
 	return (0);
 }
