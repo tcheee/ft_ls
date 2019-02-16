@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 12:34:31 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/14 11:49:34 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/15 16:49:17 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int				ft_ls_recur(char *name, t_option *opt)
 	{
 		if (ft_strcmp("/dev/", name) == 0 || ft_strcmp("/dev", name) == 0)
 			opt->dev = 1;
-		if (opt->error == 1)
+		if (opt->error == 1 && opt->aff == 0)
 			ft_printf("%s:\n", name);
 		else if (opt->error == 2 || opt->aff == 1)
 			ft_printf("\n%s:\n", name);

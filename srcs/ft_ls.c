@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 12:35:17 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/15 16:03:49 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/15 16:35:16 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int			main(int ac, char **av)
 			return (-1);
 		total = create_param(ac, av, param, i);
 		sort_param(param, total, &opt);
-		check_error_ls(ac, av, &opt);
+		check_error_ls_param(ac, param, &opt, total);
 		i = 0;
 		while (i < total)
 		{
