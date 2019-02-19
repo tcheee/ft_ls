@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 12:34:31 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/18 18:31:33 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/18 18:35:54 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int				ft_ls_recur(char *name, t_option *opt)
 		managerror_bis(name);
 	else
 	{
+		opt->slash = 0;
 		if (ft_strcmp(name, "/") == 0)
 			opt->slash = 1;
 		if (opt->error == 1 && opt->aff == 0)
