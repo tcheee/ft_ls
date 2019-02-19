@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 17:29:18 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/15 17:00:48 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/18 18:06:00 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <errno.h>
 # include <stdio.h>
 # include <string.h>
+# define BUF_SIZE 1024
 
 typedef struct	s_option
 {

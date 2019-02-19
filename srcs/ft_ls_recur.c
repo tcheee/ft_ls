@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 12:34:31 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/18 17:59:23 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/18 18:13:01 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static char		*get_new_name(char *name, char **list, t_option *opt)
 		{
 			total = opt->elem;
 			old_name = ft_strdup(name);
+			ft_printf("slash == %d\n", opt->slash);
 			if (opt->slash == 0)
 				name = ft_strcat(name, "/");
 			if (lstat(ft_strcat(name, list[i]), &info) == -1)
@@ -77,7 +78,6 @@ int				ft_ls_recur(char *name, t_option *opt)
 		managerror_bis(name);
 	else
 	{
-		opt->slash = 0;
 		if (ft_strcmp(name, "/") == 0)
 			opt->slash = 1;
 		if (opt->error == 1 && opt->aff == 0)

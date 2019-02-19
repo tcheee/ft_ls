@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 15:51:50 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/18 14:07:09 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/18 18:08:54 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ static void		ft_get_info(char *av, struct stat *info, t_option *opt)
 	struct group	*grp;
 	char			*s1;
 	char			*s2;
-	//char			*link;
+	char			*link;
 
 	if (!(s1 = malloc(opt->pad1 + 5)))
 		return ;
@@ -112,16 +112,16 @@ static void		ft_get_info(char *av, struct stat *info, t_option *opt)
 	create_padding(&s1, &s2, opt);
 	get_mode(&id, opt, info, s1);
 	get_time(info, opt, &grp, s2);
-	/*if (S_ISLNK(info->st_mode))
-	  {
-	  if (!(link = malloc(sizeof(char*) * 10000)))
-	  return ;
-	  readlink(av, link, 10000);
-	  ft_printf("%s -> %s\n", av, link);
-	  free(link);
-	  }*/
-	//else
-	ft_printf("%s\n", av);
+	if (S_ISLNK(info->st_mode))
+	{
+		if (!(link = malloc(sizeof(char*) * (BUF_SIZE +1))))
+			return ;
+		readlink(av, link, BUF_SIZE);
+		ft_printf("%s -> %s\n", av, link);
+		free(link);
+	}
+	else
+		ft_printf("%s\n", av);
 	free(s1);
 	free(s2);
 }
