@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 12:34:31 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/18 18:13:01 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/18 18:31:33 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ static char		*get_new_name(char *name, char **list, t_option *opt)
 		{
 			total = opt->elem;
 			old_name = ft_strdup(name);
-			ft_printf("slash == %d\n", opt->slash);
 			if (opt->slash == 0)
 				name = ft_strcat(name, "/");
 			if (lstat(ft_strcat(name, list[i]), &info) == -1)
