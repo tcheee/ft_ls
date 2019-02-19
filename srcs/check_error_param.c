@@ -6,24 +6,11 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 12:06:03 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/16 11:00:21 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/18 14:06:15 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
-
-/*static int		check_option_param(char *str)
-{
-	int j;
-
-	//thing to change here
-	j = 0;
-	if (str[j] == '-')
-	{
-		managerror(str);
-	}
-	return (0);
-}*/
 
 static void		check_dash_param(int ac, char **av, t_option *opt, int *i)
 {

@@ -6,7 +6,7 @@
 #    By: ayguillo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 09:51:31 by ayguillo          #+#    #+#              #
-#    Updated: 2019/02/16 13:34:47 by tcherret         ###   ########.fr        #
+#    Updated: 2019/02/18 15:59:33 by tcherret         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = libft.a
 
 INCLUDES = ./includes/
 
-CC = @ gcc 
+CC = @gcc
 
 CFLAGS = -fsanitize=address -c -I $(INCLUDES) -Wall -Wextra -Werror -g
 

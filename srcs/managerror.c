@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 12:35:33 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/15 16:05:17 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/18 14:13:01 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,9 @@ int		managerror_bis(char *name)
 
 	direct = NULL;
 	if ((direct = opendir(name)) == NULL)
+	{
+		ft_printf("%s: %s: %s \n", "ft_ls", name, strerror(errno));
 		return (-1);
+	}
 	return (-1);
 }

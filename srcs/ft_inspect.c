@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 15:51:50 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/16 14:05:12 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/18 14:07:09 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ static void		get_mode(struct passwd **id, t_option *opt,
 	ft_printf((info->st_mode & S_IXOTH) ? "x" : "-");
 	ft_printf(" ");
 	ft_printf(s1, info->st_nlink);
-	*id = getpwuid(info->st_uid);
 	if (opt->dev == 1)
 		ft_printf("%-9s ", (*id)->pw_name);
 	else
@@ -132,6 +131,7 @@ int				ft_inspect(char *path, char *name, t_option *opt)
 	struct stat info;
 	DIR			*direct;
 
+	opt->dev = 0;
 	if (opt->rep > 0)
 	{
 		direct = NULL;

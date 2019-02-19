@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 12:34:31 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/16 11:50:16 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/18 14:11:14 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,12 @@ int				ft_ls_recur(char *name, t_option *opt)
 	j = 0;
 	if (name == NULL)
 		return (0);
+	ft_printf("TEST000000000\n");
 	if ((direct = opendir(name)) == NULL)
 		managerror_bis(name);
 	else
 	{
+		ft_printf("TEST 1111111111111111\n");
 		opt->slash = 0;
 		if (ft_strcmp(name, "/") == 0)
 			opt->slash = 1;
@@ -92,7 +94,6 @@ int				ft_ls_recur(char *name, t_option *opt)
 		if (opt->l >= 1)
 			get_padding(name, opt, list, j);
 		display_list(list, j, opt, name);
-		ft_printf("on affiche la liste\n");
 		if (opt->re == 1)
 			name = get_new_name(name, list, opt);
 		free(list);
