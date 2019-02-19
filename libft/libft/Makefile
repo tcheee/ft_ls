@@ -6,7 +6,7 @@
 #    By: ayguillo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/07 09:51:31 by ayguillo          #+#    #+#              #
-#    Updated: 2019/02/18 15:59:33 by tcherret         ###   ########.fr        #
+#    Updated: 2019/02/18 17:50:56 by tcherret         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ INCLUDES = ./includes/
 
 CC = @gcc
 
-CFLAGS = -fsanitize=address -c -I $(INCLUDES) -Wall -Wextra -Werror -g
+CFLAGS = -c -I $(INCLUDES) -Wall -Wextra -Werror
 
 SRC = ft_atoi.c \
 	  ft_bzero.c \

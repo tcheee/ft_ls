@@ -6,7 +6,7 @@
 #    By: ayguillo <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/14 16:47:38 by ayguillo          #+#    #+#              #
-#    Updated: 2019/02/18 15:58:53 by tcherret         ###   ########.fr        #
+#    Updated: 2019/02/18 17:50:45 by tcherret         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ LIBFT = libft
 
 CC = gcc
 
-CFLAGS = -fsanitize=address -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror
 
 SRCS = capture_the_flag.c	\
 	   get_precision.c		\
