@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 12:35:17 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/19 20:42:45 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/19 22:06:06 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	do_the_work(char **param, t_option *opt, int *i)
 	if ((opt->rep > 1 && opt->aff == 0 && opt->error == 0))
 		ft_printf("%s:\n", param[*i]);
 	ft_ls_recur(param[*i], opt);
-	if (opt->rep > 1)
+	if (opt->rep > 1 && opt->aff != 3)
 		opt->aff = 1;
 	(*i)++;
 }

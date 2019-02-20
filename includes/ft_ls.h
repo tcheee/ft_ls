@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 17:29:18 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/19 20:51:55 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/19 21:51:07 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct	s_option
 	int	rep;
 	int	aff;
 	int	slash;
+	int	in;
 }				t_option;
 
 int				ft_inspect(char *path, char *name, t_option *opt);
@@ -53,6 +54,7 @@ int				ft_list(int ac, char **av, t_option *opt, int *i);
 int				ft_ls_recur(char *name, t_option *opt);
 int				managerror(char *name);
 int				managerror_bis(char *name);
+int				managerror_bis1(char *name);
 int				managerror_file(char *name, t_option *opt);
 char			**ft_sort(char **list, int nb);
 char			**ft_reverse_sort(char **list, int nb);

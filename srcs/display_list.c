@@ -6,11 +6,13 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 11:39:52 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/19 20:40:02 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/19 21:16:06 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
+
+//static void	checking_lnk()
 
 void		display_list(char **list, int j, t_option *opt, char *name)
 {
@@ -30,6 +32,7 @@ void		display_list(char **list, int j, t_option *opt, char *name)
 		list = ft_reverse_sort(list, opt->elem - 1);
 	else
 		list = ft_sort(list, opt->elem - 1);
+	//if (checking_lnk() == 1)
 	i = 0;
 	if (opt->l >= 1)
 		ft_printf("total %d\n", opt->tot);

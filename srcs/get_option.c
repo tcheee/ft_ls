@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 19:12:22 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/19 20:52:00 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/19 21:50:26 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	init_opt(t_option *opt)
 	(*opt).rep = 0;
 	(*opt).aff = 0;
 	(*opt).slash = 0;
+	(*opt).in = 0;
 }
 
 static void	incrementer(char **av, t_option *opt, int *i, int *j)
