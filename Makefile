@@ -6,7 +6,7 @@
 #    By: tcherret <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/07 12:35:44 by tcherret          #+#    #+#              #
-#    Updated: 2019/02/18 17:50:32 by tcherret         ###   ########.fr        #
+#    Updated: 2019/02/19 15:29:33 by tcherret         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ INCS = push_swap.h
 LIBDIR = ./libft/
 INCDIR = ./includes/
 
-OBJ = $(SRCS:.c=.o)
+OBJ = $(addprefix objs/, $(notdir $(SRCS:.c=.o)))
 
 all : $(NAME)
 
@@ -49,8 +49,12 @@ $(NAME) : $(OBJ)
 		@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(NAMELIB)
 		@echo "\033[32m$(NAME) compiled ✔ ✔ ✔ ✔\033[0m"
 
+objs/%.o : srcs/%.c
+	@mkdir -p $(@D)
+	@$(CC) -c $(CFLAGS) $< -I./includes -o $@
+
 clean :
-		@rm -rf $(OBJ)
+		@rm -rf $(OBJ) objs
 		@make -C $(LIBDIR) clean
 		@echo "\033[31mObjects deleted ✕\033[0m"
 
