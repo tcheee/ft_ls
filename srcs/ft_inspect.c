@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 15:51:50 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/19 15:49:06 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/19 21:06:47 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,9 +115,13 @@ static void		ft_get_info(char *av, struct stat *info, t_option *opt)
 	get_time(info, opt, s2);
 	if (S_ISLNK(info->st_mode))
 	{
-		i = readlink(av, link, BUF_SIZE);
+		if (opt->slash == 1)
+			i = readlink(ft_strcat("/", av), link, BUF_SIZE);
+		else
+			i = readlink(av, link, BUF_SIZE);
 		link[i] = '\0';
-		ft_printf("%s -> %s\n", av, link);
+		ft_printf("%s -> ", av);
+		ft_printf("%s\n", link);
 	}
 	else
 		ft_printf("%s\n", av);
