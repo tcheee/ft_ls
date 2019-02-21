@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 15:51:50 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/19 22:18:11 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/20 15:51:06 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,8 @@ static void		create_padding(char **s1, char **s2, t_option *opt)
 	free(tmp);
 }
 
-static void		ft_get_info(char *av, struct stat *info, t_option *opt)
+static void		ft_get_info(char *av, struct stat *info, t_option *opt,
+		char *path)
 {
 	char			*s1;
 	char			*s2;
@@ -118,7 +119,7 @@ static void		ft_get_info(char *av, struct stat *info, t_option *opt)
 		if (opt->slash == 1)
 			i = readlink(ft_strcat("/", av), link, BUF_SIZE);
 		else
-			i = readlink(av, link, BUF_SIZE);
+			i = readlink(ft_strcat(path, av), link, BUF_SIZE);
 		link[i] = '\0';
 		ft_printf("%s -> ", av);
 		ft_printf("%s\n", link);
@@ -153,6 +154,6 @@ int				ft_inspect(char *path, char *name, t_option *opt)
 		path = ft_strcat(path, "/");
 	if (lstat(ft_strcat(path, name), &info) == -1)
 		return (-1);
-	ft_get_info(name, &info, opt);
+	ft_get_info(name, &info, opt, path);
 	return (0);
 }
