@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 11:38:23 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/15 17:41:32 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/20 17:04:23 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,36 @@ static int	ft_cmptime(char *path, char *lista, char *listb)
 	return (info.st_ctime - (info2.st_ctime));
 }
 
+static void	do_the_swap(char *name, char **list, int i)
+{
+	char *tmp;
+
+	if (ft_cmptime(name, list[i], list[i + 1]) != 0)
+	{
+		if (list[i + 1] && ft_cmptime(name, list[i], list[i + 1]) < 0)
+		{
+			tmp = ft_strdup(list[i]);
+			list[i] = ft_strdup(list[i + 1]);
+			list[i + 1] = ft_strdup(tmp);
+			free(tmp);
+		}
+	}
+	else
+	{
+		if (list[i + 1] && ft_strcmp(list[i], list[i + 1]) > 0)
+		{
+			tmp = ft_strdup(list[i]);
+			list[i] = ft_strdup(list[i + 1]);
+			list[i + 1] = ft_strdup(tmp);
+			free(tmp);
+		}
+	}
+}
+
 char		**ft_time_sort(char *name, char **list, t_option *opt)
 {
 	int		i;
 	int		j;
-	char	*tmp;
 
 	j = 0;
 	while (j < opt->elem - 1)
@@ -37,66 +62,7 @@ char		**ft_time_sort(char *name, char **list, t_option *opt)
 		i = 0;
 		while (i < opt->elem - 1)
 		{
-			if (ft_cmptime(name, list[i], list[i + 1]) != 0)
-			{
-				if (list[i + 1] && ft_cmptime(name, list[i], list[i + 1]) < 0)
-				{
-					tmp = ft_strdup(list[i]);
-					list[i] = ft_strdup(list[i + 1]);
-					list[i + 1] = ft_strdup(tmp);
-					free(tmp);
-				}
-			}
-			else
-			{
-				if (list[i + 1] && ft_strcmp(list[i], list[i + 1]) > 0)
-				{
-					tmp = ft_strdup(list[i]);
-					list[i] = ft_strdup(list[i + 1]);
-					list[i + 1] = ft_strdup(tmp);
-					free(tmp);
-				}
-			}
-			i++;
-		}
-		j++;
-	}
-	return (list);
-}
-
-char		**ft_rtime_sort(char *name, char **list, t_option *opt)
-{
-	int		i;
-	int		j;
-	char	*tmp;
-
-	j = 0;
-	while (j < opt->elem - 1)
-	{
-		i = 0;
-		while (i < opt->elem - 1)
-		{
-			if (ft_cmptime(name, list[i], list[i + 1]) != 0)
-			{
-				if (list[i + 1] && ft_cmptime(name, list[i], list[i + 1]) > 0)
-				{
-					tmp = ft_strdup(list[i]);
-					list[i] = ft_strdup(list[i + 1]);
-					list[i + 1] = ft_strdup(tmp);
-					free(tmp);
-				}
-			}
-			else
-			{
-				if (list[i + 1] && ft_strcmp(list[i], list[i + 1]) < 0)
-				{
-					tmp = ft_strdup(list[i]);
-					list[i] = ft_strdup(list[i + 1]);
-					list[i + 1] = ft_strdup(tmp);
-					free(tmp);
-				}
-
-			}
+			do_the_swap(name, list, i);
 			i++;
 		}
 		j++;

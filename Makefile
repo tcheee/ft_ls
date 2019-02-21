@@ -6,7 +6,7 @@
 #    By: tcherret <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/07 12:35:44 by tcherret          #+#    #+#              #
-#    Updated: 2019/02/19 15:29:33 by tcherret         ###   ########.fr        #
+#    Updated: 2019/02/20 17:25:11 by tcherret         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,11 @@ SRCS = srcs/ft_inspect.c\
 		srcs/display_list.c\
 		srcs/get_num_elem.c\
 		srcs/create_list.c\
+		srcs/inspect_get_mode.c\
+		srcs/inspect_get_time.c\
+		srcs/ft_rtime_sort_param.c\
+		srcs/ft_rtime_sort.c\
+		srcs/get_new_name.c\
 
 INCS = push_swap.h
 

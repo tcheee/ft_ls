@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 11:39:52 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/20 15:35:01 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/20 16:48:46 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,18 @@ static int	checking_lnk(char *name, t_option *opt)
 	return (0);
 }
 
+static void	do_the_sort(char **list, t_option *opt, char *stock)
+{
+	if (opt->t == 1 && opt->r == 1)
+		ft_rtime_sort(stock, list, opt);
+	else if (opt->t == 1)
+		list = ft_time_sort(stock, list, opt);
+	else if (opt->r == 1)
+		list = ft_reverse_sort(list, opt->elem - 1);
+	else
+		list = ft_sort(list, opt->elem - 1);
+}
+
 void		display_list(char **list, int j, t_option *opt, char *name)
 {
 	int		i;
@@ -36,14 +48,7 @@ void		display_list(char **list, int j, t_option *opt, char *name)
 		if (list[i] == NULL)
 			return ;
 	stock = ft_strdup(name);
-	if (opt->t == 1 && opt->r == 1)
-		ft_rtime_sort(stock, list, opt);
-	else if (opt->t == 1)
-		list = ft_time_sort(stock, list, opt);
-	else if (opt->r == 1)
-		list = ft_reverse_sort(list, opt->elem - 1);
-	else
-		list = ft_sort(list, opt->elem - 1);
+	do_the_sort(list, opt, stock);
 	if (opt->l == 1 && checking_lnk(stock, opt) == 1)
 	{
 		free(stock);

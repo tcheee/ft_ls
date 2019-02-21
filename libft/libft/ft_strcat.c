@@ -6,18 +6,15 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 11:07:06 by ayguillo          #+#    #+#             */
-/*   Updated: 2019/02/16 13:55:14 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/20 16:28:53 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strcat(char *s1, const char *s2)
+static int	get_len(char *s1, const char *s2)
 {
-	int		i;
-	int		j;
-	char	*tmp;
-	int		len;
+	int len;
 
 	if (s1 && s2)
 		len = ft_strlen(s1) + ft_strlen(s2);
@@ -26,7 +23,18 @@ char	*ft_strcat(char *s1, const char *s2)
 	else if (s2)
 		len = ft_strlen(s2);
 	else
-		return (NULL);
+		return (0);
+	return (len);
+}
+
+char		*ft_strcat(char *s1, const char *s2)
+{
+	int		i;
+	int		j;
+	char	*tmp;
+	int		len;
+
+	len = get_len(s1, s2);
 	if (!(tmp = malloc(sizeof(*tmp) * (len + 1))))
 		return (NULL);
 	i = 0;

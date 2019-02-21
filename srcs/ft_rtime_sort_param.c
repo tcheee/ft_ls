@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_time_sort.c                                     :+:      :+:    :+:   */
+/*   ft_rtime_sort_param.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/14 11:38:23 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/20 17:05:23 by tcherret         ###   ########.fr       */
+/*   Created: 2019/02/20 16:58:37 by tcherret          #+#    #+#             */
+/*   Updated: 2019/02/20 17:07:37 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ static int	ft_cmptime_param(char *lista, char *listb)
 
 static void	do_the_swap(char **list, int i)
 {
-	char *tmp;
+	char	*tmp;
 
 	if (ft_cmptime_param(list[i], list[i + 1]) != 0)
 	{
-		if (list[i + 1] && ft_cmptime_param(list[i], list[i + 1]) < 0)
+		if (list[i + 1] && ft_cmptime_param(list[i], list[i + 1]) > 0)
 		{
 			tmp = ft_strdup(list[i]);
 			list[i] = ft_strdup(list[i + 1]);
@@ -40,7 +40,7 @@ static void	do_the_swap(char **list, int i)
 	}
 	else
 	{
-		if (list[i + 1] && ft_strcmp(list[i], list[i + 1]) > 0)
+		if (list[i + 1] && ft_strcmp(list[i], list[i + 1]) < 0)
 		{
 			tmp = ft_strdup(list[i]);
 			list[i] = ft_strdup(list[i + 1]);
@@ -50,7 +50,7 @@ static void	do_the_swap(char **list, int i)
 	}
 }
 
-char		**ft_time_sort_param(char **list, int nb)
+char		**ft_rtime_sort_param(char **list, int nb)
 {
 	int		i;
 	int		j;

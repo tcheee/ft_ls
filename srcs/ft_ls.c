@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 12:35:17 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/19 22:06:06 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/20 16:31:52 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,6 @@ int			main(int ac, char **av)
 		while (i < total)
 			do_the_work(param, &opt, &i);
 	}
+	//while (1);
 	return (0);
 }

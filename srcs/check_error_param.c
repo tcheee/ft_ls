@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 12:06:03 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/20 16:22:01 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/20 16:46:49 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static void		check_dash_param(int ac, char **av, t_option *opt, int *i)
 	}
 }
 
-static int				check_file_param(char **av, t_option *opt, int total)
+static int		check_file_param(char **av, t_option *opt, int total)
 {
 	DIR		*direct;
 	int		i;

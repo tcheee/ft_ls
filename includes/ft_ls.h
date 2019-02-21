@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 17:29:18 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/19 21:51:07 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/20 17:24:47 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,8 @@ int				get_num_elem(DIR *direct, char *name, t_option *opt);
 void			create_list(int *i, struct dirent *info,
 		DIR *direct, char **list);
 int				get_num_arg(int ac, char **av);
+void			get_mode(struct stat *info, t_option *opt, char *s1);
+void			get_time(struct stat *info, t_option *opt, char *s2);
+char			*get_new_name(char *name, char **list, t_option *opt);
 
 #endif

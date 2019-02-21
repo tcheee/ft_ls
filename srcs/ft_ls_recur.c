@@ -6,59 +6,42 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 12:34:31 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/19 22:05:14 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/20 17:42:20 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
-static char		*get_new_name(char *name, char **list, t_option *opt)
+static void		do_the_check(char *name, t_option *opt)
 {
-	DIR				*direct;
-	char			*old_name;
-	int				i;
-	int				total;
-	struct stat		info;
-
-	opt->in = 1;
-	old_name = NULL;
-	direct = NULL;
-	if ((direct = opendir(name)) == NULL)
+	if (opt->in == 0)
+		managerror_bis1(name);
+	else if (opt->in == 1)
 		managerror_bis(name);
-	else
+}
+
+static void		print_option(char *name, t_option *opt, DIR *direct, int *i)
+{
+	opt->slash = 0;
+	if (ft_strcmp(name, "/") == 0)
+		opt->slash = 1;
+	if (opt->error == 1 && opt->aff != 3)
 	{
-		i = 0;
-		while (i < opt->elem && list[i])
-		{
-			total = opt->elem;
-			old_name = ft_strdup(name);
-			if (opt->slash == 0)
-				name = ft_strcat(name, "/");
-			if (lstat(ft_strcat(name, list[i]), &info) == -1)
-				return (NULL);
-			name = old_name;
-			if (S_ISDIR(info.st_mode))
-			{
-				if (ft_strcmp(list[i], ".")
-						&& ft_strcmp(list[i], ".."))
-					if ((opt->a == 1 && (list[i][0] == '.'))
-							|| (list[i][0] != '.'))
-					{
-						old_name = ft_strdup(name);
-						if (opt->slash == 0)
-							name = ft_strcat(name, "/");
-						name = ft_strcat(name, list[i]);
-						ft_printf("\n%s:\n", name);
-						ft_ls_recur(name, opt);
-						name = old_name;
-						opt->elem = total;
-					}
-			}
-			i++;
-		}
+		ft_printf("%s:\n", name);
+		opt->aff = 3;
 	}
-	closedir(direct);
-	return (NULL);
+	else if (opt->error == 2 || opt->aff == 3 || opt->aff == 1)
+		ft_printf("\n%s:\n", name);
+	*i = get_num_elem(direct, name, opt);
+}
+
+static void		finish_algo(char **name, char **list, int j, t_option *opt)
+{
+	if (opt->l >= 1)
+		get_padding(*name, opt, list, j);
+	display_list(list, j, opt, *name);
+	if (opt->re == 1)
+		*name = get_new_name(*name, list, opt);
 }
 
 int				ft_ls_recur(char *name, t_option *opt)
@@ -75,36 +58,17 @@ int				ft_ls_recur(char *name, t_option *opt)
 	if (name == NULL)
 		return (0);
 	if ((direct = opendir(name)) == NULL)
-	{
-		if (opt->in == 0)
-			managerror_bis1(name);
-		else if (opt->in == 1)
-			managerror_bis(name);
-	}
+		do_the_check(name, opt);
 	else
 	{
-		opt->slash = 0;
-		if (ft_strcmp(name, "/") == 0)
-			opt->slash = 1;
-		if (opt->error == 1 && opt->aff != 3)
-		{
-			ft_printf("%s:\n", name);
-			opt->aff = 3;
-		}
-		else if (opt->error == 2 || opt->aff == 3 || opt->aff == 1)
-			ft_printf("\n%s:\n", name);
-		i = get_num_elem(direct, name, opt);
+		print_option(name, opt, direct, &i);
 		if (!(list = malloc(sizeof(char**) * i)))
 			return (-1);
 		j = i;
 		create_list(&i, info, direct, list);
-		if (opt->l >= 1)
-			get_padding(name, opt, list, j);
-		display_list(list, j, opt, name);
-		if (opt->re == 1)
-			name = get_new_name(name, list, opt);
+		finish_algo(&name, list, j, opt);
 		free(list);
-		//closedir
 	}
+	//closedir(direct);
 	return (0);
 }
