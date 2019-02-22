@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 11:42:32 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/15 16:09:51 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/21 22:47:19 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,9 @@ char	**ft_reverse_sort(char **list, int nb)
 		{
 			if (list[i + 1] && ft_strcmp(list[i], list[i + 1]) < 0)
 			{
-				tmp = ft_strdup(list[i]);
-				list[i] = ft_strdup(list[i + 1]);
-				list[i + 1] = ft_strdup(tmp);
-				free(tmp);
+				tmp = list[i];
+				list[i] = list[i + 1];
+				list[i + 1] = tmp;
 			}
 			i++;
 		}

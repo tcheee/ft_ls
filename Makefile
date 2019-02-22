@@ -6,7 +6,7 @@
 #    By: tcherret <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/07 12:35:44 by tcherret          #+#    #+#              #
-#    Updated: 2019/02/20 17:25:11 by tcherret         ###   ########.fr        #
+#    Updated: 2019/02/21 22:39:55 by tcherret         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAMELIB = ./libft/libftprintf.a
 
 CC = @gcc
 
-CFLAGS =-Wall -Wextra -Werror
+CFLAGS =-Wall -Wextra -Werror -g
 
 SRCS = srcs/ft_inspect.c\
 		srcs/get_option.c\

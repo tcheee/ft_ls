@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 15:52:50 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/14 11:38:13 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/21 23:17:21 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,24 @@ int				get_padding(char *path, t_option *opt, char **list, int j)
 	int				i;
 	char			*stock;
 	struct stat		info;
+	char			*tmp;
 
 	i = 0;
 	opt->tot = 0;
 	while (i < j)
 	{
-		stock = ft_strdup(path);
+		stock = path;
 		if ((opt->a && list[i][0] == '.') || list[i][0] != '.')
 		{
-			path = ft_strcat(path, "/");
-			if ((lstat(ft_strcat(path, list[i]), &info) == -1))
+			tmp = ft_strcat(path, "/");
+			path = ft_strcat(tmp, list[i]);
+			free(tmp);
+			if ((lstat(path, &info) == -1))
 				return (-1);
 			find_number(opt, &info);
+			free(path);
 		}
-		path = ft_strdup(stock);
-		free(stock);
+		path = stock;
 		i++;
 	}
 	return (0);

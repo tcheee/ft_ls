@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 12:34:31 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/20 17:42:20 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/22 10:34:45 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,19 @@ static void		finish_algo(char **name, char **list, int j, t_option *opt)
 		*name = get_new_name(*name, list, opt);
 }
 
+static void		free_list(char **list, int j)
+{
+	int i;
+
+	i = 0;
+	while (i < j)
+	{
+		free(list[i]);
+		i++;
+	}
+	free(list);
+}
+
 int				ft_ls_recur(char *name, t_option *opt)
 {
 	DIR				*direct;
@@ -67,8 +80,7 @@ int				ft_ls_recur(char *name, t_option *opt)
 		j = i;
 		create_list(&i, info, direct, list);
 		finish_algo(&name, list, j, opt);
-		free(list);
+		free_list(list, j);
 	}
-	//closedir(direct);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 12:35:25 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/16 14:12:35 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/21 22:26:28 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,9 @@ char	**ft_sort(char **list, int nb)
 		{
 			if (list[i + 1] && list[i] && ft_strcmp(list[i], list[i + 1]) > 0)
 			{
-				tmp = ft_strdup(list[i]);
-				list[i] = ft_strdup(list[i + 1]);
-				list[i + 1] = ft_strdup(tmp);
-				free(tmp);
+				tmp = list[i];
+				list[i] = list[i + 1];
+				list[i + 1] = tmp;
 			}
 			i++;
 		}

@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 16:58:37 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/20 17:07:37 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/21 23:38:44 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ static void	do_the_swap(char **list, int i)
 	{
 		if (list[i + 1] && ft_cmptime_param(list[i], list[i + 1]) > 0)
 		{
-			tmp = ft_strdup(list[i]);
-			list[i] = ft_strdup(list[i + 1]);
-			list[i + 1] = ft_strdup(tmp);
+			tmp = list[i];
+			list[i] = list[i + 1];
+			list[i + 1] = tmp;
 			free(tmp);
 		}
 	}
@@ -42,9 +42,9 @@ static void	do_the_swap(char **list, int i)
 	{
 		if (list[i + 1] && ft_strcmp(list[i], list[i + 1]) < 0)
 		{
-			tmp = ft_strdup(list[i]);
-			list[i] = ft_strdup(list[i + 1]);
-			list[i + 1] = ft_strdup(tmp);
+			tmp = list[i];
+			list[i] = list[i + 1];
+			list[i + 1] = tmp;
 			free(tmp);
 		}
 	}

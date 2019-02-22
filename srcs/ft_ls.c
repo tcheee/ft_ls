@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 12:35:17 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/20 16:31:52 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/22 10:34:27 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,19 @@ static void	sort_param(char **param, int total, t_option *opt)
 		param = ft_sort(param, total - 1);
 }
 
+static void	free_param(char **param, int total)
+{
+	int j;
+
+	j = 0;
+	while (j < total)
+	{
+		free(param[j]);
+		j++;
+	}
+	free(param);
+}
+
 static void	do_the_work(char **param, t_option *opt, int *i)
 {
 	if (ft_strcmp("/", param[*i]) == 0)
@@ -62,7 +75,7 @@ int			main(int ac, char **av)
 	if (i == ac)
 	{
 		check_error_ls(ac, av, &opt);
-		ft_ls_recur(ft_strdup("."), &opt);
+		ft_ls_recur(".", &opt);
 	}
 	else
 	{
@@ -74,7 +87,7 @@ int			main(int ac, char **av)
 		i = 0;
 		while (i < total)
 			do_the_work(param, &opt, &i);
+		free_param(param, total);
 	}
-	//while (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 12:06:03 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/20 16:46:49 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/21 22:44:48 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ static int		check_file_param(char **av, t_option *opt, int total)
 		{
 			if ((direct = opendir(av[i])) == NULL)
 				managerror_file(av[i], opt);
+			else
+				closedir(direct);
 			i++;
 		}
 	}
@@ -73,6 +75,8 @@ int				check_error_ls_param(int ac,
 				opt->error = 1;
 				managerror(av[i]);
 			}
+			else
+				closedir(direct);
 			i++;
 		}
 	}

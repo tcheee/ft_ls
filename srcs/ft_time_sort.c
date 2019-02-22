@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 11:38:23 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/20 17:04:23 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/21 23:35:19 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,19 @@ static int	ft_cmptime(char *path, char *lista, char *listb)
 {
 	struct stat info;
 	struct stat	info2;
+	char		*tmp;
+	char		*tmp1;
 
-	path = ft_strcat(path, "/");
-	if (lstat(ft_strcat(path, lista), &info) == -1)
+	tmp = ft_strcat(path, "/");
+	tmp1 = ft_strcat(tmp, lista);
+	if (lstat(tmp1, &info) == -1)
 		return (-1);
-	if (lstat(ft_strcat(path, listb), &info2) == -1)
+	free(tmp1);
+	tmp1 = ft_strcat(tmp, listb);
+	if (lstat(tmp1, &info2) == -1)
 		return (-1);
+	free(tmp1);
+	free(tmp);
 	return (info.st_ctime - (info2.st_ctime));
 }
 
@@ -33,20 +40,18 @@ static void	do_the_swap(char *name, char **list, int i)
 	{
 		if (list[i + 1] && ft_cmptime(name, list[i], list[i + 1]) < 0)
 		{
-			tmp = ft_strdup(list[i]);
-			list[i] = ft_strdup(list[i + 1]);
-			list[i + 1] = ft_strdup(tmp);
-			free(tmp);
+			tmp = list[i];
+			list[i] = list[i + 1];
+			list[i + 1] = tmp;
 		}
 	}
 	else
 	{
 		if (list[i + 1] && ft_strcmp(list[i], list[i + 1]) > 0)
 		{
-			tmp = ft_strdup(list[i]);
-			list[i] = ft_strdup(list[i + 1]);
-			list[i + 1] = ft_strdup(tmp);
-			free(tmp);
+			tmp = list[i];
+			list[i] = list[i + 1];
+			list[i + 1] = tmp;
 		}
 	}
 }
