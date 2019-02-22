@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 11:38:23 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/21 23:36:55 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/22 12:08:04 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ static void	do_the_swap(char **list, int i)
 			tmp = list[i];
 			list[i] = list[i + 1];
 			list[i + 1] = tmp;
-			free(tmp);
 		}
 	}
 	else
@@ -45,7 +44,6 @@ static void	do_the_swap(char **list, int i)
 			tmp = list[i];
 			list[i] = list[i + 1];
 			list[i + 1] = tmp;
-			free(tmp);
 		}
 	}
 }

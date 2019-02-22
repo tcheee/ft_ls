@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/31 15:51:50 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/22 11:06:25 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/22 12:06:34 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static void		create_padding(char **s1, char **s2, t_option *opt,
 	char *tmp;
 	char *new;
 
+	ft_bzero(*s1, ft_strlen(*s1));
+	ft_bzero(*s2, ft_strlen(*s2));
 	tmp = ft_itoa(opt->pad1);
 	(*s1)[0] = '%';
 	new = ft_strcat(*s1, tmp);
