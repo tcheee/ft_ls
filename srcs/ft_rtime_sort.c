@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/20 17:00:06 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/22 20:59:05 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/22 21:00:44 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	ft_cmptime(char *path, char *lista, char *listb)
 		return (-1);
 	free(tmp1);
 	free(tmp);
-	return (info.st_ctime - (info2.st_ctime));
+	return (info.st_mtime - (info2.st_mtime));
 }
 
 static void	do_the_swap(char *name, char **list, int i)
