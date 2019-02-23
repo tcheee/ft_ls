@@ -6,7 +6,7 @@
 /*   By: tcherret <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 11:38:23 by tcherret          #+#    #+#             */
-/*   Updated: 2019/02/21 23:35:19 by tcherret         ###   ########.fr       */
+/*   Updated: 2019/02/22 20:47:03 by tcherret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,25 @@ static int	ft_cmptime(char *path, char *lista, char *listb)
 	return (info.st_ctime - (info2.st_ctime));
 }
 
+static int	ft_cmptype(char *lista, char *listb)
+{
+	struct stat	info;
+	struct stat	info2;
+
+	if (lstat(lista, &info) == -1)
+		return (-1);
+	if (lstat(listb, &info2) == -1)
+		return (-1);
+	if (S_ISDIR(info.st_mode) && S_ISDIR(info2.st_mode))
+		return (0);
+	else if (S_ISDIR(info.st_mode))
+		return (1);
+	else if (S_ISDIR(info2.st_mode))
+		return (-1);
+	else
+		return (0);
+}
+
 static void	do_the_swap(char *name, char **list, int i)
 {
 	char *tmp;
@@ -47,7 +66,7 @@ static void	do_the_swap(char *name, char **list, int i)
 	}
 	else
 	{
-		if (list[i + 1] && ft_strcmp(list[i], list[i + 1]) > 0)
+		if (list[i + 1] && ft_cmptype(list[i], list[i + 1]) < 0)
 		{
 			tmp = list[i];
 			list[i] = list[i + 1];
